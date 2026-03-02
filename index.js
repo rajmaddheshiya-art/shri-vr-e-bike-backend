@@ -11,7 +11,7 @@ const app = express()
 
 
 app.use(cors({
-    origin:"https://shri-vr-e-bike.onrender.com",
+    origin: ["https://shri-vr-e-bike.co.in", "https://www.shri-vr-e-bike.co.in"],
     methods:["GET", "POST"],
     credentials:true
 }))
