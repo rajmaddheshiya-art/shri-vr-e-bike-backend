@@ -29,7 +29,7 @@ export const signup = async (req, res) => {
             password: hassPass
         })
 
-        const token = genrateToken(createUser)
+        const token = genrateToken(createUser._id)
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -72,7 +72,7 @@ export const login = async (req, res) => {
         }
 
 
-        const token = genrateToken(existEmail)
+        const token = genrateToken(existEmail._id)
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -121,5 +121,15 @@ export const getCurrentUser = async (req, res) => {
     }
 }
 
-
+export const getOtherUser = async(req, res)=>{
+    try {
+        let user = await User.find({
+            _id:{$ne:req.userId}
+        })
+        return res.status(200).json(user)
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
 
